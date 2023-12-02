@@ -17,7 +17,7 @@ defmodule Aoc.Day2 do
   end
 
   def part2() do
-    Aoc.get_file_lines("./input/test.txt")
+    Aoc.get_file_lines("./input/day2.txt")
     |> Enum.map(fn line ->
       green = find_all_occurances_for_color("green", line) |> Enum.max()
       red = find_all_occurances_for_color("red", line) |> Enum.max()
