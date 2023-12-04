@@ -28,7 +28,7 @@ defmodule Aoc.Day1 do
     |> Enum.sum()
   end
 
-  # if there is a substring like twone - it should become 2ne but doing it like this results in tw1. Need to find numbers by iterating over string itself.
+  # Working on dummy data. From some research on discord, looks like 'eightwothree' should be passed as 823. Currently it is 8wo3
   def part2() do
     Aoc.get_file_lines("./input/day1.txt")
     |> Enum.map(fn line ->
@@ -50,8 +50,9 @@ defmodule Aoc.Day1 do
   end
 
   defp replace_words(line) do
-    Enum.reduce(@numbers, line, fn {key, value}, l ->
-      String.replace(l, key, value)
+    num_words = Regex.scan(~r/(one|two|three|four|five|six|seven|eight|nine)/, line, capture: :all_but_first) |> List.flatten()
+    Enum.reduce(num_words, line, fn word, l ->
+      String.replace(l, word, Map.get(@numbers, word))
     end)
   end
 end
